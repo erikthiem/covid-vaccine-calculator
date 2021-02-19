@@ -1,6 +1,6 @@
 require 'date'
-require_relative 'bloomberg_parser.rb'
-require_relative 'smart_prompt'
+require_relative 'lib/bloomberg_parser.rb'
+require_relative 'lib/smart_prompt'
 
 state = SmartPrompt.get_input("Which state? please use full name and capitalize", "Ohio")
 bloomberg_data = BloombergParser.new
