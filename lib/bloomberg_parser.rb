@@ -2,17 +2,23 @@ require 'net/http'
 require 'uri'
 require 'nokogiri'
 require 'json'
-require 'pry'
+require 'yaml'
 
 class BloombergParser
 
   BLOOMBERG_DATA_URL = "https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/" 
+  BLOOMBERG_DATA_CACHED_FILE = "data/bloomberg_data.yml"
 
   def initialize
-    full_html_data = download_data()
-    full_nokogiri_data = Nokogiri::HTML(full_html_data)
-    data_js = full_nokogiri_data.css('script#dvz-data-cave')[0]
-    ruby_hash_of_all_data = JSON.parse(data_js)
+    if recent_cached_data?
+      ruby_hash_of_all_data = retrieve_cached_data()
+    else
+      full_html_data = download_data()
+      full_nokogiri_data = Nokogiri::HTML(full_html_data)
+      data_js = full_nokogiri_data.css('script#dvz-data-cave')[0]
+      ruby_hash_of_all_data = JSON.parse(data_js)
+      cache_data(ruby_hash_of_all_data)
+    end
 
     @usa_vaccination_data = ruby_hash_of_all_data["vaccination"]["usa"]
   end
@@ -24,6 +30,20 @@ class BloombergParser
   end
 
   private
+
+  def cache_data(data)
+    File.open(BLOOMBERG_DATA_CACHED_FILE, "w") { |file| file.write(data.to_yaml) }
+  end
+
+  def recent_cached_data?
+    return false unless File.exist?(BLOOMBERG_DATA_CACHED_FILE)
+    modified_time = File.mtime(BLOOMBERG_DATA_CACHED_FILE)
+    return modified_time >= Time.now - (3600 * 24)
+  end
+
+  def retrieve_cached_data
+    YAML.load(File.read(BLOOMBERG_DATA_CACHED_FILE))
+  end
 
   def download_data
     uri = URI.parse(BLOOMBERG_DATA_URL)
