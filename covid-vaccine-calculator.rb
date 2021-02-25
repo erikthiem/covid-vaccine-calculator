@@ -9,9 +9,9 @@ people_in_ohio_25_and_older = 8055314
 
 vaccinations_per_day_in_state_right_now = bloomberg_data.vaccinations_per_day_in_state(state)
 
-already_started = 1339231
+already_completed_vaccination = bloomberg_data.completed_vaccinations_in_state(state)
 
-people_ahead_of_you = people_in_ohio_25_and_older - already_started
+people_ahead_of_you = people_in_ohio_25_and_older - already_completed_vaccination
 
 percentage_of_people_who_will_get_it = 0.7
 

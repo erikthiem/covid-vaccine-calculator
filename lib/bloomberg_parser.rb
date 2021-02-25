@@ -24,12 +24,18 @@ class BloombergParser
   end
 
   def vaccinations_per_day_in_state(requested_state_name)
-    all_data_for_this_state = @usa_vaccination_data.select {|state| state["name"] == requested_state_name}.first
-    vaccinations_per_day = all_data_for_this_state["noDosesTotalLatestRateValue"]
-    return vaccinations_per_day
+    all_data_for_state(requested_state_name)["noDosesTotalLatestRateValue"]
+  end
+
+  def completed_vaccinations_in_state(requested_state_name)
+    all_data_for_state(requested_state_name)["noCompletedVaccination"]
   end
 
   private
+
+  def all_data_for_state(state_name)
+    @usa_vaccination_data.select {|state| state["name"] == state_name}.first
+  end
 
   def cache_data(data)
     File.open(BLOOMBERG_DATA_CACHED_FILE, "w") { |file| file.write(data.to_yaml) }
