@@ -3,11 +3,11 @@ require_relative 'lib/bloomberg_parser.rb'
 require_relative 'lib/census_parser.rb'
 require_relative 'lib/smart_prompt'
 
-state = SmartPrompt.get_input("Which state? please use full name and capitalize", "Ohio")
+state = SmartPrompt.get_input("Which state? please use 2 letter code", "OH")
 bloomberg_data = BloombergParser.new
 census_data = CensusParser.new
 
-people_in_ohio_25_and_older = census_data.people_in_state_age_and_older("Ohio", 25)
+people_in_ohio_25_and_older = census_data.people_in_state_age_and_older(state, 25)
 
 vaccinations_per_day_in_state_right_now = bloomberg_data.vaccinations_per_day_in_state(state)
 

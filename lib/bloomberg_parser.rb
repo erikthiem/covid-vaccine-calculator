@@ -23,18 +23,18 @@ class BloombergParser
     @usa_vaccination_data = ruby_hash_of_all_data["vaccination"]["usa"]
   end
 
-  def vaccinations_per_day_in_state(requested_state_name)
-    all_data_for_state(requested_state_name)["noDosesTotalLatestRateValue"]
+  def vaccinations_per_day_in_state(state_code)
+    all_data_for_state(state_code)["noDosesTotalLatestRateValue"]
   end
 
-  def completed_vaccinations_in_state(requested_state_name)
-    all_data_for_state(requested_state_name)["noCompletedVaccination"]
+  def completed_vaccinations_in_state(state_code)
+    all_data_for_state(state_code)["noCompletedVaccination"]
   end
 
   private
 
-  def all_data_for_state(state_name)
-    @usa_vaccination_data.select {|state| state["name"] == state_name}.first
+  def all_data_for_state(state_code)
+    @usa_vaccination_data.select {|state| state["code"] == state_code}.first
   end
 
   def cache_data(data)
