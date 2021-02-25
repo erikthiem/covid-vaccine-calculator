@@ -5,15 +5,13 @@ require_relative 'lib/smart_prompt'
 
 state = SmartPrompt.get_input("Which state? please use 2 letter code", "OH")
 bloomberg_data = BloombergParser.new
-census_data = CensusParser.new
-
-people_in_ohio_25_and_older = census_data.people_in_state_age_and_older(state, 25)
+census_data = CensusParser.new(state, 25)
 
 vaccinations_per_day_in_state_right_now = bloomberg_data.vaccinations_per_day_in_state(state)
 
 already_completed_vaccination = bloomberg_data.completed_vaccinations_in_state(state)
 
-people_ahead_of_you = people_in_ohio_25_and_older - already_completed_vaccination
+people_ahead_of_you = census_data.people_older_than_you_in_your_state - already_completed_vaccination
 
 percentage_of_people_who_will_get_it = 0.7
 
