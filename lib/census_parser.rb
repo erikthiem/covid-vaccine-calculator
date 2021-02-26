@@ -17,7 +17,7 @@ class CensusParser
 
     CSV.foreach(CENSUS_DATA_FILE, :headers => true) do |row|
       # Only care about selected state
-      if row.to_h["STATE"] == fips_code_for_state(@state)
+      if row.to_h["STATE"] == fips_code_for_state(@state).to_i.to_s
 
         # Only care about all sexes, not male- or female-specific data
         if row.to_h["SEX"] == "0"
