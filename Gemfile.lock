@@ -5,12 +5,24 @@ GEM
     date (3.1.1)
     json (2.5.1)
     mini_portile2 (2.5.0)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
     racc (1.5.2)
+    rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
+    ruby2_keywords (0.0.4)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    tilt (2.0.10)
     uri (0.10.1)
     yaml (0.1.1)
 
@@ -23,6 +35,7 @@ DEPENDENCIES
   date
   json
   nokogiri
+  sinatra
   uri
   yaml
 

@@ -1,4 +1,7 @@
 Simple app to calculate when you can likely get a Covid vaccine.
 
-Run with: 'ruby covid-vaccine-calculator.rb'
-You might have to install some gems too.
+Run 'bundle install'
+then
+Run with: 'ruby console-app.rb'
+
+or if you like web browser run with: 'ruby app.rb' to use the Sinatra app.
