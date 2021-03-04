@@ -1,7 +1,9 @@
 require 'sinatra'
 require_relative 'covid-vaccine-calculator'
+require_relative 'lib/state_lookup.rb'
 
 get '/' do
+  @states = StateLookup.all_states_with_abbreviations
   erb :index
 end
 

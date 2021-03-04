@@ -1,10 +1,10 @@
 require 'csv'
+require_relative 'state_lookup.rb'
 
 class CensusParser
 
   CENSUS_DATA_FILE = "data/sc-est2019-agesex-civ.csv"
   OPTIMIZED_STATE_AGE_DATA = "data/optimized-state-age-data.yml"
-  FIPS_STATE_CODES_DATA_FILE = "data/state_codes.txt"
 
   def initialize(state, age)
     @state = state
@@ -12,18 +12,11 @@ class CensusParser
   end
 
   def people_older_than_you_in_your_state
-    optimized_state_age_data["#{fips_code_for_state(@state)}:#{@age}"]
+    optimized_state_age_data["#{StateLookup.fips_code_for_state(@state)}:#{@age}"]
   end
 
   private
 
-  def fips_code_for_state(state)
-    CSV.foreach(FIPS_STATE_CODES_DATA_FILE, :headers => true, :col_sep => "|") do |row|
-      if row.to_h["STUSAB"] == state
-        return row.to_h["STATE"].to_i.to_s
-      end
-    end
-  end
 
   def optimized_state_age_data
     if File.exist?(OPTIMIZED_STATE_AGE_DATA)
