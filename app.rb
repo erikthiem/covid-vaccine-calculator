@@ -10,5 +10,5 @@ post '/' do
   age = params["age"].to_i
   percent_taking = params["percent_taking"].to_f / 100
 
-  CovidVaccineCalculator.new(state, age, percent_taking).calculate
+  CovidVaccineCalculator.new(state, age, percent_taking, false).calculate
 end

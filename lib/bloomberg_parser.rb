@@ -9,8 +9,8 @@ class BloombergParser
   BLOOMBERG_DATA_URL = "https://www.bloomberg.com/graphics/covid-vaccine-tracker-global-distribution/" 
   BLOOMBERG_DATA_CACHED_FILE = "data/bloomberg_data.yml"
 
-  def initialize
-    if recent_cached_data?
+  def initialize(break_cache)
+    if recent_cached_data? && !break_cache
       ruby_hash_of_all_data = retrieve_cached_data()
     else
       full_html_data = download_data()
