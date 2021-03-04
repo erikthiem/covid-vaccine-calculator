@@ -9,6 +9,7 @@ post '/' do
   state = params["state"]
   age = params["age"].to_i
   percent_taking = params["percent_taking"].to_f / 100
+  break_bloomberg_cache = false
 
-  CovidVaccineCalculator.new(state, age, percent_taking, false).calculate
+  CovidVaccineCalculator.new(state, age, percent_taking, break_bloomberg_cache).calculate
 end
