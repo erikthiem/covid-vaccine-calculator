@@ -4,4 +4,4 @@ Run 'bundle install'
 then
 Run with: 'ruby console-app.rb'
 
-or if you like web browser run with: 'ruby app.rb' to use the Sinatra app.
+or if you prefer a web browser run with: 'ruby app.rb' to use the Sinatra app.
